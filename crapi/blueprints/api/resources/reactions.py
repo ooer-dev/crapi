@@ -1,12 +1,15 @@
 from flask import current_app
 from flask_restful import Resource, reqparse
 
+from crapi.blueprints.api.util import authenticate_bot
 from crapi.data.reaction import reaction_schema, reactions_schema
 from crapi.models import db
 from crapi.models.reaction import Reaction
 
 
 class ReactionsResource(Resource):
+    method_decorators = [authenticate_bot]
+
     def get(self):
         reactions = Reaction.query.all()
         return reactions_schema.dump(reactions)
@@ -30,6 +33,8 @@ class ReactionsResource(Resource):
 
 
 class ReactionResource(Resource):
+    method_decorators = [authenticate_bot]
+
     def get(self, reaction_id):
         reaction = Reaction.query.get_or_404(reaction_id)
 
