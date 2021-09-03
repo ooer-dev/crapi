@@ -3,7 +3,7 @@ from crapi.models import db
 
 class Reaction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    guild_id = db.Column(db.BigInteger, unique=True, nullable=False)
+    guild_id = db.Column(db.BigInteger, index=True, nullable=False)
 
     trigger = db.Column(db.Text, nullable=False)
     response = db.Column(db.Text, nullable=False)
