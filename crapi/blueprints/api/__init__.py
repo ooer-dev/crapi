@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask_restful import Api
 
-from crapi.blueprints.api.reactions import ReactionsResource, ReactionResource
+from crapi.blueprints.api.resources.reactions import ReactionsResource, ReactionResource
 from crapi.util.csrf import csrf
 
 blueprint = Blueprint('api', __name__, url_prefix='/api')
