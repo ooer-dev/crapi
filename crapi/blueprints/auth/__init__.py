@@ -15,6 +15,6 @@ def user_loader(user_id):
     return User.query.filter_by(id=user_id).first()
 
 
-blueprint = Blueprint('auth', __name__, url_prefix='/auth/')
+blueprint = Blueprint('auth', __name__, url_prefix='/auth')
 
 from crapi.blueprints.auth.views import login, logout
