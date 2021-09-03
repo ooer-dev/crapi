@@ -1,7 +1,6 @@
 import click
 from flask import Flask
 from flask_session import Session
-from flask_wtf import CSRFProtect
 
 
 def create_app(config_override=None):
@@ -11,7 +10,9 @@ def create_app(config_override=None):
     application.config.from_object(config_override)
 
     Session(application)
-    CSRFProtect(application)
+
+    from crapi.util.csrf import csrf
+    csrf.init_app(application)
 
     from crapi.models import db
     db.init_app(application)
