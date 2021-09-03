@@ -19,9 +19,6 @@ def create_app(config_override=None):
     from crapi.blueprints.auth import login_manager
     login_manager.init_app(application)
 
-    from crapi.blueprints.api import api
-    api.init_app(application)
-
     from crapi import blueprints
     for blueprint in blueprints.blueprints:
         application.register_blueprint(blueprint)
