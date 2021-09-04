@@ -1,9 +1,9 @@
-from crapi.blueprints import standalone, auth, api
+from crapi.blueprints import api, auth, standalone
 
 blueprint_packages = [
-    standalone,
-    auth,
     api,
+    auth,
+    standalone,
 ]
 
 blueprints = [p.blueprint for p in blueprint_packages]

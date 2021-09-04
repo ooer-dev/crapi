@@ -1,11 +1,11 @@
-from flask import current_app, flash, get_flashed_messages, redirect, render_template, request, url_for, Response
+from flask import current_app, flash, get_flashed_messages, redirect, render_template, request, url_for
 from flask_login import current_user, login_user
 from flask_wtf.csrf import generate_csrf, validate_csrf
 from itsdangerous import BadData
 
 from crapi.blueprints.auth import blueprint
-from crapi.blueprints.auth.util import authenticate_user, make_serializer, make_session, is_safe_url, redirect_back, \
-    DISCORD_AUTHORIZATION_URL, DISCORD_TOKEN_URL
+from crapi.blueprints.auth.util import DISCORD_AUTHORIZATION_URL, DISCORD_TOKEN_URL, authenticate_user, \
+    is_safe_url, make_serializer, make_session, redirect_back
 
 
 def generate_state():
@@ -40,7 +40,7 @@ def login_callback():
     if current_user.is_authenticated:
         return redirect_back()
 
-    def _handle_error(error: str = None) -> Response:
+    def _handle_error(error: str = ''):
         reasons = {
             'access_denied': 'You did not approve access to your Discord account.',
             'no_guild': 'You are not a member of r/Ooer.',

@@ -6,11 +6,10 @@ class ReactionSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Reaction
 
-    # Smart hyperlinking
     _links = ma.Hyperlinks(
         {
-            "self": ma.AbsoluteURLFor('api.reaction', values=dict(reaction_id="<id>")),
-            "collection": ma.AbsoluteURLFor('api.reactions'),
+            'self': ma.AbsoluteURLFor('api.reaction', values=dict(reaction_id='<id>')),
+            'collection': ma.AbsoluteURLFor('api.reactions'),
         }
     )
 

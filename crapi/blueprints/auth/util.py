@@ -1,7 +1,7 @@
-from urllib.parse import urlparse, urljoin
+from urllib.parse import urljoin, urlparse
 
 from flask import current_app, redirect, request
-from itsdangerous import BadData, URLSafeTimedSerializer
+from itsdangerous import URLSafeTimedSerializer
 from requests_oauthlib import OAuth2Session
 
 from crapi.models import db
@@ -13,7 +13,10 @@ DISCORD_TOKEN_URL = 'https://discord.com/api/oauth2/token'
 
 
 def make_serializer() -> URLSafeTimedSerializer:
-    return URLSafeTimedSerializer(current_app.secret_key, salt='ohmaniamnotgoodwithcomputerplstohelp')
+    return URLSafeTimedSerializer(
+        current_app.config.get('SECRET_KEY', 'ohmaniamnotgoodwithsecretplstohelp'),
+        salt='ohmaniamnotgoodwithcomputerplstohelp'
+    )
 
 
 def make_session(token=None) -> OAuth2Session:

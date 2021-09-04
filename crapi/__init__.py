@@ -30,6 +30,6 @@ def create_app(config_override=None):
     @application.cli.command()
     def routes():
         for rule in application.url_map.iter_rules():
-            click.echo("%s %s" % (rule, rule.endpoint))
+            click.echo('%s %s' % (rule, rule.endpoint))
 
     return application
