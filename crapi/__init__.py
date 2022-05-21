@@ -1,6 +1,7 @@
 import click
 from flask import Flask
 from flask_session import Session
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 
 def create_app(config_override=None):
@@ -8,6 +9,9 @@ def create_app(config_override=None):
 
     application.config.from_pyfile('config.py')
     application.config.from_object(config_override)
+
+    # Trust headers sent by Heroku Router (vegur)
+    application.wsgi_app = ProxyFix(application.wsgi_app, x_for=1, x_proto=1, x_port=1)
 
     Session(application)
 
